@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>div by using css</title>
+        <style>
+            .main{
+                width: 400px;
+                height: 400px;
+                background-color: aqua;
+            }
+            #parent-row-1{
+                width: 400px;
+                height:200 px;
+                background-color: red;
+            }
+            #parent-row-2{
+                width: 400px;
+                height:200 px;
+                background-color: blue;
+            }
+            .col1{
+                width: 200px;
+                height: 200px;
+                background-color: green;
+                float:left;
+            }
+            .col2{
+                width: 200px;
+                height: 200px;
+                background-color: wheat;
+                float:left;
+            }
+            .text{
+                width: 1000px;
+                height: 1000x;
+                background-color:red;
+                font-size: 50px;
+                color: black;
+                font-weight: bold;
+                font-style: italic;
+            }
+            .para{
+                width: 1000px;
+                height:400px;
+                background-color: aqua;
+                color:black;
+                font-size: 50px;
+                text-transform: capitalize;
+                text-align: center;
+                text-decoration: underline;
+                word-spacing: 1px;
+                letter-spacing: 1px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="text">
+            welcome to HTML+CSS practice
+        </div>
+        <br/>
+        <br/>
+        <div class="main">  <!--main div-->
+            <div id="parent-row-1"> <!--parent dev-->
+            <div class="col1">home</div>
+            <div class="col2">about</div>
+            </div>
+            <hr/>
+            <div id="parent-row-2"><!---parent div-->
+                <div class="col1">gallery</div>
+                <div class="col2">height</div>
+
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <p class="para">
+            When someone becomes better at expressing 
+            themselves verbally, they naturally start to feel more confident.
+             This is especially important for engineers or technical professionals
+              who often need to explain complex ideas.
+            </p>
+    </body>
+</html>
