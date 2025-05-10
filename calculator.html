@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head><title>calculator</title></head>
+    <fieldset><legend>CALCULATOR</legend> 
+        <body>
+            <input type="number" name="first" Id="first" step="any"/>
+            <select Id="ope">
+                <option>+</option>
+                <option>-</option>
+                <option>x</option> 
+                 <option>/</option>
+            </select>
+            <input type="number" name="second" Id="second" step="any"/>
+            <br/>
+            <br/>
+            <button onclick="cal()"> CALCULATE</button>
+            <input type="text" name="" Id="res" readonly=""/>
+        </body>
+    </fieldset> 
+    <script type="text/javascript">
+        function cal(){
+            var opr1 = document.getElementById('first').value;
+            var opr2 = document.getElementById('second').value;
+            var ope = document.getElementById('ope').value;
+            if( ope =='+' ){
+               var res = parseInt(opr1) + parseInt(opr2);
+            }
+            if( ope == '-'){
+               var res = parseInt (opr1) - parseInt(opr2);
+            }
+        
+            if( ope == 'x'){
+               var res = parseInt(opr1) * parseInt(opr2);
+            }
+            if( ope == '/' ){
+               var res = parseInt(opr1) / parseInt(opr2);
+        }
+        document.getElementById('res').value = res;
+    }
+    </script>
+</html>
