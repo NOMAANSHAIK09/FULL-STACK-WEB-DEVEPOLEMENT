@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CALCULATOR</title>
+        <p1>A SIMPLE  CALCULATOR BY <br/>NOMAAN SHAIK</p1>
+        <style>
+            .parent{
+                border: 2px solid black;
+                width: 500px;
+                height: 700px;
+                margin: auto;
+                top: 10px;
+                background-color:antiquewhite;
+                position: relative;
+                  /* background: #fff;
+    padding: 20px;
+    border-radius: 12px;*/
+  
+            }
+            .display{
+          
+             /* display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif; */
+                border:2px solid black;
+                width: 350px;
+                height :200px;
+                  margin: auto; 
+                  position: absolute;  
+                 top:30px;
+                left:75px;
+                font-size: 30px;
+                
+            } 
+        .but1:hover{
+            background-color: #45a049;
+
+            }
+            .row1{
+                border:2px solid black;
+                width: 350px;
+                height: 70px ;
+                position: absolute;
+                top:260px;
+                left:75px;
+            }
+            .r1-col1{
+                border:1px solid black;
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                top:5px;
+                left:25px;
+                font-size: 4px;
+
+            }
+            .r1-col2{
+                 border:1px solid black;
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                top : 5px;
+                left:110px;
+
+            }
+         .r1-col3{
+                 border:1px solid black;
+                 width: 60px;
+                height: 60px;
+                position: absolute;
+                top : 5px;
+                left: 190px;
+         }
+            .r1-col4{
+                border:1px solid black;
+                 width: 60px;
+                height: 60px;
+                position: absolute;
+                top : 5px;
+                left:270px;
+            }   
+            .row2{
+                border:2px solid black;
+                width: 350px;
+                height: 70px ;
+                position: absolute;
+                top:345px;
+                left:75px;
+
+            }  
+            .row3{
+                 border:2px solid black;
+                width: 350px;
+                height: 70px ;
+                position: absolute;
+                top:430px;
+                left:75px;
+            }   
+            .row4{
+                 border:2px solid black;
+                width: 350px;
+                height: 70px ;
+                position: absolute;
+                top:520px;
+                left:75px;
+            }    
+            .r4-col1{
+                border:1px solid black;
+                width: 140px;
+                height: 60px;
+                position: absolute;
+                top:5px;
+                left:25px;
+            }  
+            .r4-col2{
+                border:1px solid black;
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                top:5px;
+                left:190px;
+            } 
+            .r4-col3{
+ border:1px solid black;
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                top:5px;
+                left:270px;
+            } 
+            .row5{
+                 border:2px solid black;
+                width: 150px;
+                height: 70px ;
+                position: absolute;
+                top:610px;
+                left:75px;
+                font-size:20px;
+            }
+            .r5-col2{
+                 border:2px solid black;
+                width: 150px;
+                height: 70px ;
+                position: absolute;
+                top:610px;
+                left:260px;
+                font-size:20px;
+
+            }
+            .but1{
+                width: 60px;
+                height: 60px;
+                background-color:aquamarine;
+                font-size: 25px;
+            }
+           .but{
+            background-color: aquamarine;  
+            width: 140px;
+            height: 60px;
+            font-size: 25px ;
+           }
+
+        </style>
+        <body>
+           
+            <div class="parent">
+                <div ><input type="text" class="display" disabled / ></div>
+                <div class="button">
+                <div class="row1">
+                    <div class="r1-col1"><center><button  onclick="append('1')" class="but1" >1</button></center></div>
+                    <div class="r1-col2"><center><button   onclick="append('2')" class="but1">2</button></center></div>
+                    <div class="r1-col3"><center><button  onclick="append('3')" class="but1">3</button></center></div>
+                    <div class="r1-col4"><center><button  onclick="append('+')" class="but1">+</button></center></div>
+                </div>
+                <div class="row2">
+                    <div class="r1-col1"><center><button onclick="append('4')" class="but1">4</button></center></div>
+                    <div class="r1-col2"><center><button  onclick="append('5')" class="but1">5</button></center></div>
+                    <div class="r1-col3"><center><button  onclick="append('6')" class="but1">6</button></center></div>
+                    <div class="r1-col4"><center><button  onclick="append('-')" class="but1">-</button></center></div>
+                </div>
+                <div class="row3">
+                    <div class="r1-col1"><center><button  onclick="append('7')" class="but1">7</button></center></div>
+                    <div class="r1-col2"><center><button  onclick="append('8')" class="but1">8</button></center></div>
+                    <div class="r1-col3"><center><button  onclick="append('9')" class="but1">9</button></center></div>
+                    <div class="r1-col4"><center><button  onclick="append('*')" class="but1">*</button></center></div>   
+                </div>
+                <div class="row4">
+                    <div class="r4-col1"><center><button  onclick="append('0')" class="but">0</button></center></div>
+                     <div class="r4-col2"><center><button  onclick="append('.')" class="but1">.</button></center></div>
+                <div class="r4-col3"><center><button class="but1" onclick="append('/')">/</button></center></div>
+                </div>
+                <div class=""><center><button class="row5" onclick="calculate()">RESULT</button></center></div>
+                <div class=""><center><button  class="r5-col2" onclick="cleardisplay()">clear</button></center></div>
+                 </div>
+            </div>
+        
+        </body>
+        <script>
+           
+            let display = document.querySelector('.display');
+
+function append(value){
+  display.value += value;
+}
+function cleardisplay(){
+    display.value = '';
+}
+
+function calculate(){
+  try {
+    display.value = eval(display.value);
+  } catch {
+    display.value = 'Error';
+  }
+}
+
+        </script>
+    </head>
+</html>
