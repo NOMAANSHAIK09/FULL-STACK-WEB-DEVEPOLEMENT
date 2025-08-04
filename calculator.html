@@ -1,41 +1,256 @@
 <!DOCTYPE html>
-<html>
-    <head><title>calculator</title></head>
-    <fieldset><legend>CALCULATOR</legend> 
-        <body>
-            <input type="number" name="first" Id="first" step="any"/>
-            <select Id="ope">
-                <option>+</option>
-                <option>-</option>
-                <option>x</option> 
-                 <option>/</option>
-            </select>
-            <input type="number" name="second" Id="second" step="any"/>
-            <br/>
-            <br/>
-            <button onclick="cal()"> CALCULATE</button>
-            <input type="text" name="" Id="res" readonly=""/>
-        </body>
-    </fieldset> 
-    <script type="text/javascript">
-        function cal(){
-            var opr1 = document.getElementById('first').value;
-            var opr2 = document.getElementById('second').value;
-            var ope = document.getElementById('ope').value;
-            if( ope =='+' ){
-               var res = parseInt(opr1) + parseInt(opr2);
-            }
-            if( ope == '-'){
-               var res = parseInt (opr1) - parseInt(opr2);
-            }
-        
-            if( ope == 'x'){
-               var res = parseInt(opr1) * parseInt(opr2);
-            }
-            if( ope == '/' ){
-               var res = parseInt(opr1) / parseInt(opr2);
-        }
-        document.getElementById('res').value = res;
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Calculator by Nomaan Shaik</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
-    </script>
+
+    body {
+      background-color: #f3f3f3;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      width: 400px;
+      margin: auto;
+      background-color: antiquewhite;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .dropdown {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .calculator {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .display {
+      width: 100%;
+      height: 60px;
+      font-size: 28px;
+      padding: 10px;
+      text-align: right;
+      border: 2px solid #000;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .buttons button {
+      padding: 15px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #6ce0c4;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #45a049;
+    }
+
+    .wide {
+      grid-column: span 2;
+      background-color: #ffb84d;
+    }
+
+    .wide:hover {
+      background-color: #ffa31a;
+    }
+
+    .clear {
+      background-color: #ff4d4d;
+    }
+
+    .clear:hover {
+      background-color: #e60000;
+    }
+
+    input[type="number"], input[type="date"], select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button.calculate {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button.calculate:hover {
+      background-color: #45a049;
+    }
+
+    p.result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>NOMAAN SHAIK</h2>
+    <!--select option-->
+    <select id="calcType" class="dropdown" onchange="switchCalculator()">
+      <option value="basic">Basic Calculator</option>
+      <option value="age">Age Calculator</option>
+      <option value="currency">Currency Converter</option>
+      <option value="gst">GST Calculator</option>
+    </select>
+
+    <!-- Basic Calculator -->
+    <div id="basic" class="calculator active">
+      <input type="text" class="display" disabled />
+      <div class="buttons">
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('+')">+</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('-')">-</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('*')">*</button>
+
+        <button onclick="append('0')" class="wide">0</button>
+        <button onclick="append('.')">.</button>
+        <button onclick="append('/')">/</button>
+
+        <button onclick="calculate()" class="wide">=</button>
+        <button onclick="cleardisplay()" class="wide clear">Clear</button>
+      </div>
+    </div>
+
+    <!-- Age Calculator -->
+    <div id="age" class="calculator">
+      <input type="date" id="dob" />
+      <button class="calculate" onclick="calculateAge()">Calculate Age</button>
+      <p id="ageResult" class="result"></p>
+    </div>
+
+    <!-- Currency Converter -->
+    <div id="currency" class="calculator">
+      <input type="number" id="amount" placeholder="Amount in INR" />
+      <select id="currencySelect">
+        <option value="usd">USD</option>
+        <option value="eur">EUR</option>
+        <option value="jpy">JPY</option>
+      </select>
+      <button class="calculate" onclick="convertCurrency()">Convert</button>
+      <p id="currencyResult" class="result"></p>
+    </div>
+
+    <!-- GST Calculator -->
+    <div id="gst" class="calculator">
+      <input type="number" id="price" placeholder="Price (₹)" />
+      <input type="number" id="gstRate" placeholder="GST Rate (%)" />
+      <button class="calculate" onclick="calculateGST()">Calculate GST</button>
+      <p id="gstResult" class="result"></p>
+    </div>
+  </div>
+
+  <script>
+    function switchCalculator() {
+      const type = document.getElementById("calcType").value;
+      const sections = document.querySelectorAll('.calculator');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(type).classList.add('active');
+    }
+
+    // Basic Calculator Functions
+    const display = document.querySelector('.display');
+
+    function append(value) {
+      display.value += value;
+    }
+
+    function cleardisplay() {
+      display.value = '';
+    }
+
+    function calculate() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = 'Error';
+      }
+    }
+
+    // Age Calculator
+    function calculateAge() {
+      const dob = new Date(document.getElementById("dob").value);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      document.getElementById("ageResult").innerText = `You are ${age} years old.`;
+    }
+
+    // Currency Converter
+    function convertCurrency() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const currency = document.getElementById("currencySelect").value;
+      let rate = 0;
+      switch (currency) {
+        case 'usd': rate = 0.012; break;
+        case 'eur': rate = 0.011; break;
+        case 'jpy': rate = 1.78; break;
+      }
+      const result = amount * rate;
+      document.getElementById("currencyResult").innerText = `Converted: ${result.toFixed(2)} ${currency.toUpperCase()}`;
+    }
+
+    // GST Calculator
+    function calculateGST() {
+      const price = parseFloat(document.getElementById("price").value);
+      const rate = parseFloat(document.getElementById("gstRate").value);
+      const gst = price * rate / 100;
+      const total = price + gst;
+      document.getElementById("gstResult").innerText = `GST: ₹${gst.toFixed(2)}, Total: ₹${total.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
+
 </html>
