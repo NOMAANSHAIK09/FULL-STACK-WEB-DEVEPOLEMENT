@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleg.css"/>
+    <style>
+        *{
+margin: 0;
+padding: 0;
+}
+body{
+background-color: aqua;
+text-align: center;
+}
+.container{
+height: 70vh;
+/* width: 70vh; */
+ display: flex; 
+/* background: #000; */
+/* flex-wrap: wrap; */
+justify-content: center;
+align-items: center;
+}
+.game{
+height:60vmin ;
+width: 60vmin;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+gap: 1.5vmin;
+}
+.box{
+    height: 18vmin;
+    width: 18vmin;
+    border-radius: 1rem;
+    border: none;
+    box-shadow:0 0 1rem rgba(0, 0,0,0.9) ;
+    font-size: 8vmin;
+    color: #b0413e;
+    background-color: beige;
+}
+#reset-btn{
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: #191913;
+    color: #fff;
+    border-radius: 1rem;
+    border: none;
+}
+#new{
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: #191913;
+    color: #fff;
+    border-radius: 1rem;
+    border: none; 
+}
+#msgg{
+    color: #fff;
+    font-size: 8vmin; 
+}
+.msg{
+height: 100vmin;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+gap: 4rem;
+}
+.hidden{
+    display: none;
+}
+    </style>
+</head>
+<body>
+   <div class="msg hidden">
+    <p id="msgg">Winner</p>
+    <button id="new">New Game</button>
+   </div>
+ <main>
+     <h1>tic tac toe</h1>
+     <div class="container">
+         <div class="game">
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+          </div>
+      </div>
+      <button id="reset-btn">reset game</button>
+ </main>
+ <script type="text/javascript" src="game.js">
+    let boxs=document.querySelectorAll(".box");
+let resetbtn=document.querySelector("reset-btn");
+let newgame = document.querySelector("#new");
+let msgcont = document.querySelector(".msg");
+let msg = document.querySelector("#msgg")
+let turn = true;
+const winpattern=[
+    [0,1,2],
+    [0,3,6],
+    [0,4,8],
+    [1,4,7],
+    [2,5,8],
+    [2,4,5],
+    [6,7,8]
+,];
+boxs.forEach((box) =>{
+    box.addEventListener("click",()=>{
+        console.log("box was clicked");
+        if (turn){
+            box.innerText="O";
+            turn=false;
+        } else {
+            box.innerText="X";
+            turn=true;
+        }
+        box.disabled=true;
+
+
+        checkwinner();
+    });
+
+});
+
+const showwinner = (winner) => {
+      msg.innerText = `Congratulations, Winner is ${winner}`;
+   msgcont.classList.remove("hidden");
+   disablebox();
+};
+
+const checkwinner = ()=>{
+    for (let pattern of winpattern){
+        let pos1 = boxs[pattern[0]].innerText;
+         let pos2 = boxs[pattern[1]].innerText;
+          let pos3 = boxs[pattern[2]].innerText;
+          if(pos1 != "" && pos2 != "" && pos3 != ""){
+            if(pos1 === pos2 && pos2 === pos3){
+               console.log("winner",pos1);
+               showwinner(pos1);
+            }
+        }
+    }
+};
+const disablebox = () =>{
+    for(let box of boxs){
+        box.disabled = true;
+       
+    }
+};
+const enablebox = () =>{
+    for(let box of boxs){
+        box.disabled = false;
+        box.innerText="";
+    }
+};
+const resetgame = () =>{
+    turn = true;
+    enablebox();
+     msg.classList.add("hidden");
+};
+newgame.addEventListener("click",resetgame);
+resetbtn.addEventListener("click",resetgame);
+ </script>
+</body>
+</html>
